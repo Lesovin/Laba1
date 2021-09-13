@@ -62,14 +62,20 @@ void Set::operator+(int number)
 
 Set Set::operator+(const Set& a) const
 {
-	Set ResultSet;
-	ResultSet = *this;
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = 0; j < a.size; j++) 
+	Set ResultSet=*this;
+	for (int i = 0; i < a.size; i++) {
+		bool flag = true;
+		for (int j = 0; j < size; j++) 
 		{
-			if (data[j] != a.data[i]) ResultSet + a.data[i]; 
-			break;
+			if (a.data[i] == data[j]) 
+			{
+				flag = false;
+				break;
+			}
+		}
+		if (flag == true) 
+		{
+			ResultSet+a.data[i];
 		}
 	}
 	return ResultSet;
@@ -90,7 +96,7 @@ Set Set::Intersection(const Set& set) const
 
 int Set::operator[](int index) const
 {
-	if ((index > size) || (index < 0)) throw "Incorrect index!";
+	if ((index > size) || (index < 0)||(size==0))throw "Incorrect index!";
 		return data[index];
 }
 
@@ -113,8 +119,11 @@ Set Set::operator-(const Set& set) const
 	{
 		for (int j = 0; j < set.size; j++)
 		{
-			if (data[i] == set.data[j])ResultSet - set.data[j];
-			break;
+			if (data[i] == set.data[j])
+			{
+				ResultSet - set.data[j];
+				break;
+			}
 		}
 	}
 	return ResultSet;

@@ -3,19 +3,17 @@
 
 int main()
 {
-    std::cout << "Hello World\n";
     Set A;
-    A + 1;
-    std::cout<<A[0];
+    Set B;
+    Set C;
     try
     {
+        A + 1;
         A + 2;
-        A + 3;
-        A + 4;
         std::cout << A;
-        A - 2;
-        A - 3;
-       std::cout<<A;
+        B + 1;
+        C = A - B;
+        std::cout << C;
     }
     catch (const char* err)
     {

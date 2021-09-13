@@ -1,7 +1,7 @@
 #include "Set.h"
 #include <stdio.h>
 
-int Set::Contains(int number)
+int Set::Contain(int number) const
 {
 	int index = 0;
 	while (data[index] != number)
@@ -18,24 +18,74 @@ Set::Set()
 	size = 0;
 }
 
+Set::Set(const Set& a)
+{
+	size = a.size;
+	data = new int[size];
+	for (int i = 0; i < size; i++)
+	{
+		data[i] = a.data[i];
+	}
+}
+
 Set::~Set()
 {
-	delete []data;
+	delete [] data;
+	size = 0;
+	data = NULL;
+}
+
+Set& Set::operator=(const Set& a)
+{
+		size = a.size;
+		data = new int[size];
+		for (int i = 0; i < size; i++)
+		{
+			data[i] = a.data[i];
+		}
+		return *this;
 }
 
 void Set::operator+(int number)
 {
+	for (int i = 0; i < size; i++)
+	{
+		if (data[i] == number)throw "Number already eixst!";
+	}
 	int* tmp = new int[size + 1];
 	for (int i = 0; i < size; i++){tmp[i] = data[i];}
 	tmp[size] = number;
-	delete[]data;
+	delete[] data;
 	data = tmp;
 	size++;
 }
 
-void Set::operator+(Set& set)
+Set Set::operator+(const Set& a) const
 {
+	Set ResultSet;
+	ResultSet = *this;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < a.size; j++) 
+		{
+			if (data[j] != a.data[i]) ResultSet + a.data[i]; 
+			break;
+		}
+	}
+	return ResultSet;
+}
 
+Set Set::Intersection(const Set& set) const
+{
+	Set ResultSet;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < set.size; j++) 
+		{
+			if (data[i] == set.data[j]) ResultSet + data[i];
+		}
+	}
+	return ResultSet;
 }
 
 int Set::operator[](int index) const
@@ -47,7 +97,7 @@ int Set::operator[](int index) const
 void Set::operator-(int number)
 {
 	int* tmp = new int[size-1];
-	int index = Contains(number);
+	int index = Contain(number);
 	size--;
 	for (int i = 0; i < index; i++) { tmp[i] = data[i]; }
 	for (int i = index+1; i < size + 1; i++) { tmp[i - 1] = data[i]; }
@@ -55,14 +105,34 @@ void Set::operator-(int number)
 	data = tmp;
 }
 
+Set Set::operator-(const Set& set) const
+{
+	Set ResultSet;
+	ResultSet = *this;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < set.size; j++)
+		{
+			if (data[i] == set.data[j])ResultSet - set.data[j];
+			break;
+		}
+	}
+	return ResultSet;
+}
+
 int Set::GetSize() const
 {
 	return size;
 }
 
-std::ostream& operator<<(std::ostream& out,const Set& set)
+std::ostream& operator<<(std::ostream& out,const Set& set) 
 {
 	int size = set.GetSize();
+	if (size == 0)
+	{
+		out << "Empty set";
+		return out;
+	}
 	out << "{";
 	for (int i = 0; i < size - 1; i++)
 	{

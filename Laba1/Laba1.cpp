@@ -4,7 +4,6 @@
 
 bool InputControl()
 {
-
     if (std::cin.fail())
     {
         std::cin.clear();
@@ -91,9 +90,9 @@ int main()
             }
         }
             break;
-        case 50:std::cout << "Result of combining:"<<"\n";//Объединение множеств
+        case 50:std::cout << "Result of combining:";//Объединение множеств
             C = A + B;
-            std::cout << C;
+            std::cout << C<<"\n";
             system("pause");
             break;
         case 51:std::cout << "From which set to subtract?" << "\n";//Разность множеств

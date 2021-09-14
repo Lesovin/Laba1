@@ -31,8 +31,6 @@ Set::Set(const Set& a)
 Set::~Set()
 {
 	delete [] data;
-	size = 0;
-	data = NULL;
 }
 
 Set& Set::operator=(const Set& a)
@@ -96,12 +94,13 @@ Set Set::Intersection(const Set& set) const
 
 int Set::operator[](int index) const
 {
-	if ((index > size) || (index < 0)||(size==0))throw "Incorrect index!";
+	if ((index > size-1) || (index < 0)||(size==0))throw "Incorrect index!";
 		return data[index];
 }
 
 void Set::operator-(int number)
 {
+	if (size == 0) throw "No numbers exist!";
 	int* tmp = new int[size-1];
 	int index = Contain(number);
 	size--;

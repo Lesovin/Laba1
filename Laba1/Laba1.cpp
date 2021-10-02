@@ -22,7 +22,7 @@ int main()
     Set C;
     int Menu;
     int Number;
-    std::cout << "Laboratory work №1. Class:Set"<<"\n";
+    std::cout << "Test of new branch"<<"\n";
     system("pause");
     for(;;)
     {

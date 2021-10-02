@@ -17,17 +17,18 @@ bool InputControl()
 
 int main()
 {
-    Set A;
-    Set B;
-    Set C;
+    Set<float> A;
+    Set<float> B;
+    Set<float> C;
     int Menu;
-    int Number;
-    std::cout << "Test of new branch"<<"\n";
+    float Number;
+    int Index;
+    std::cout << "Laboratory work №2. Sets"<<"\n";
     system("pause");
     for(;;)
     {
         system("cls");
-        std::cout << "1.Get a number by index"<<"\n";
+        std::cout << "1.Get an element by index"<<"\n";
         std::cout << "2.Combining sets" << "\n";
         std::cout << "3.Difference of sets" << "\n";
         std::cout << "4.Add a number" << "\n";
@@ -53,7 +54,7 @@ int main()
             {
             case 49:
                 std::cout << "Enter the index:";
-                std::cin >> Number;
+                std::cin >> Index;
                 if (InputControl() == false) break;
                 if (std::cin.fail())
                 {
@@ -64,7 +65,7 @@ int main()
                     break;
                 }
                 try {
-                    std::cout << "This is your number:" << A[Number - 1] << "\n";
+                    std::cout << "This is your number:" << A[Index - 1] << "\n";
                 }catch (const char* err)
                 {
                     std::cerr<<err<<"\n";
@@ -74,10 +75,10 @@ int main()
                 system("pause");
                 break;
             case 50:std::cout << "Enter the index:";
-                std::cin >> Number;
+                std::cin >> Index;
                 if (InputControl() == false) break;
                 try {
-                    std::cout << "This is your number:" << B[Number - 1] << "\n";
+                    std::cout << "This is your number:" << B[Index - 1] << "\n";
                 }
                 catch (const char* err)
                 {

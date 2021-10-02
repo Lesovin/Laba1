@@ -1,7 +1,8 @@
 #include "Set.h"
 #include <stdio.h>
 
-int Set::Contain(int number) const
+template <class T>
+int Set<T>::Contain(T number) const
 {
 	int index = 0;
 	while (data[index] != number)
@@ -12,13 +13,15 @@ int Set::Contain(int number) const
 	return index;
 }
 
-Set::Set()
+template <class T>
+Set <T>::Set()
 {
 	data = NULL;
 	size = 0;
 }
 
-Set::Set(const Set& a)
+template <class T>
+Set<T>::Set(const T& a)
 {
 	size = a.size;
 	data = new int[size];
@@ -28,63 +31,68 @@ Set::Set(const Set& a)
 	}
 }
 
-Set::~Set()
+template <class T>
+Set<T>::~Set()
 {
-	delete [] data;
+	delete[] data;
 }
 
-Set& Set::operator=(const Set& a)
+template <class T>
+T& Set<T>::operator=(const T& a)
 {
-		size = a.size;
-		data = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			data[i] = a.data[i];
-		}
-		return *this;
+	size = a.size;
+	data = new int[size];
+	for (int i = 0; i < size; i++)
+	{
+		data[i] = a.data[i];
+	}
+	return *this;
 }
 
-void Set::operator+(int number)
+template <class T>
+void Set<T>::operator+(T number)
 {
 	for (int i = 0; i < size; i++)
 	{
 		if (data[i] == number)throw "Number already eixst!";
 	}
 	int* tmp = new int[size + 1];
-	for (int i = 0; i < size; i++){tmp[i] = data[i];}
+	for (int i = 0; i < size; i++) { tmp[i] = data[i]; }
 	tmp[size] = number;
 	delete[] data;
 	data = tmp;
 	size++;
 }
 
-Set Set::operator+(const Set& a) const
+template <class T>
+T Set<T>::operator+(const Set<T>& a) const
 {
-	Set ResultSet=*this;
+	T ResultSet = *this;
 	for (int i = 0; i < a.size; i++) {
 		bool flag = true;
-		for (int j = 0; j < size; j++) 
+		for (int j = 0; j < size; j++)
 		{
-			if (a.data[i] == data[j]) 
+			if (a.data[i] == data[j])
 			{
 				flag = false;
 				break;
 			}
 		}
-		if (flag == true) 
+		if (flag == true)
 		{
-			ResultSet+a.data[i];
+			ResultSet + a.data[i];
 		}
 	}
 	return ResultSet;
 }
 
-Set Set::Intersection(const Set& set) const
+template <class T>
+T Set<T>::Intersection(const Set<T>& set) const
 {
-	Set ResultSet;
+	T ResultSet;
 	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < set.size; j++) 
+		for (int j = 0; j < set.size; j++)
 		{
 			if (data[i] == set.data[j]) ResultSet + data[i];
 		}
@@ -92,27 +100,30 @@ Set Set::Intersection(const Set& set) const
 	return ResultSet;
 }
 
-int Set::operator[](int index) const
+template <class T>
+T Set<T>::operator[](int index) const
 {
-	if ((index > size-1) || (index < 0)||(size==0))throw "Incorrect index!";
-		return data[index];
+	if ((index > size - 1) || (index < 0) || (size == 0))throw "Incorrect index!";
+	return data[index];
 }
 
-void Set::operator-(int number)
+template <class T>
+void Set<T>::operator-(T number)
 {
 	if (size == 0) throw "No numbers exist!";
-	int* tmp = new int[size-1];
+	int* tmp = new int[size - 1];
 	int index = Contain(number);
 	size--;
 	for (int i = 0; i < index; i++) { tmp[i] = data[i]; }
-	for (int i = index+1; i < size + 1; i++) { tmp[i - 1] = data[i]; }
+	for (int i = index + 1; i < size + 1; i++) { tmp[i - 1] = data[i]; }
 	delete[] data;
 	data = tmp;
 }
 
-Set Set::operator-(const Set& set) const
+template <class T>
+T Set<T>::operator-(const Set<T>& set) const
 {
-	Set ResultSet;
+	T ResultSet;
 	ResultSet = *this;
 	for (int i = 0; i < size; i++)
 	{
@@ -128,12 +139,14 @@ Set Set::operator-(const Set& set) const
 	return ResultSet;
 }
 
-int Set::GetSize() const
+template <class T>
+int Set<T>::GetSize() const
 {
 	return size;
 }
 
-std::ostream& operator<<(std::ostream& out,const Set& set) 
+template <class T>
+std::ostream& operator << (std::ostream& out, const Set<T>& set)
 {
 	int size = set.GetSize();
 	if (size == 0)

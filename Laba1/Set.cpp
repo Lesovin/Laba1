@@ -1,3 +1,4 @@
+#pragma once
 #include "Set.h"
 #include <stdio.h>
 

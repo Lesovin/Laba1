@@ -39,10 +39,10 @@ public:
 	{
 		delete[] data;
 	}
-	T& operator=(const T& a)
+	Set<T>& operator=(const Set<T>& a)
 	{
 		size = a.size;
-		data = new int[size];
+		data = new T[size];
 		for (int i = 0; i < size; i++)
 		{
 			data[i] = a.data[i];
@@ -55,16 +55,16 @@ public:
 		{
 			if (data[i] == number)throw "Number already eixst!";
 		}
-		int* tmp = new int[size + 1];
+		T* tmp = new T[size + 1];
 		for (int i = 0; i < size; i++) { tmp[i] = data[i]; }
 		tmp[size] = number;
 		delete[] data;
 		data = tmp;
 		size++;
 	}
-	T operator+(const Set<T>& a) const
+	Set<T> operator+(const Set<T>& a) const
 	{
-		T ResultSet = *this;
+		Set<T> ResultSet = *this;
 		for (int i = 0; i < a.size; i++) {
 			bool flag = true;
 			for (int j = 0; j < size; j++)
@@ -83,9 +83,9 @@ public:
 		return ResultSet;
 	}
 
-	T Intersection(const Set<T>& set) const
+	Set<T> Intersection(const Set<T>& set) const
 	{
-		T ResultSet;
+		Set<T> ResultSet;
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < set.size; j++)
@@ -111,9 +111,9 @@ public:
 		delete[] data;
 		data = tmp;
 	}
-	T operator-(const Set<T>& set) const
+	Set<T> operator-(const Set<T>& set) const
 	{
-		T ResultSet;
+		Set<T> ResultSet;
 		ResultSet = *this;
 		for (int i = 0; i < size; i++)
 		{

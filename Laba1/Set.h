@@ -26,10 +26,10 @@ public:
 		data = NULL;
 		size = 0;
 	}
-	Set(const T& a)
+	Set(const Set<T>& a)
 	{
 		size = a.size;
-		data = new int[size];
+		data = new T[size];
 		for (int i = 0; i < size; i++)
 		{
 			data[i] = a.data[i];

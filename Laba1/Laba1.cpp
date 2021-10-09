@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <conio.h>
+#include <string>
 #include "Set.h"
 
 bool InputControl()
@@ -17,11 +18,11 @@ bool InputControl()
 
 int main()
 {
-    Set<float> A;
-    Set<float> B;
-    Set<float> C;
+    Set<std::string> A;
+    Set<std::string> B;
+    Set<std::string> C;
     int Menu;
-    float Number;
+   std::string Number;
     int Index;
     std::cout << "Laboratory work №2. Sets"<<"\n";
     system("pause");

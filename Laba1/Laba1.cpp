@@ -295,6 +295,7 @@ int main()
                    break;
             }
         }
+               break;
             case 53: 
                 for (;;) //Убрать элемент
                 {
@@ -382,6 +383,7 @@ int main()
                            break;
                     }
                 }
+                break;
         case 54:std::cout << "Result of intersection:";//Пересечение множеств
             switch (Choice)
             {

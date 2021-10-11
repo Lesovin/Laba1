@@ -13,7 +13,7 @@ private:
 		while (data[index] != number)
 		{
 			index++;
-			if (index > size - 1)throw "Number does not exist!";
+			if (index > size - 1)throw "Element does not exist!";
 		}
 		return index;
 	}
@@ -54,7 +54,7 @@ public:
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (data[i] == number)throw "Number already eixst!";
+			if (data[i] == number) throw "Element already eixst!";
 		}
 		T* tmp = new T[size + 1];
 		for (int i = 0; i < size; i++) { tmp[i] = data[i]; }
@@ -103,7 +103,7 @@ public:
 	}
 	void operator-(T number)
 	{
-		if (size == 0) throw "No numbers exist!";
+		if (size == 0) throw "No elements exist!";
 		T* tmp = new T[size - 1];
 		int index = Contain(number);
 		size--;

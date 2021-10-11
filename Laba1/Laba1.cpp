@@ -27,10 +27,10 @@ int main()
     Set<float> AF;
     Set<float> BF;
     Set<float> CF;
-    int Choice;
-    int Menu;
-    int NumberI;
-    float NumberF;
+    int Choice=0;
+    int Menu=0;
+    int NumberI=0;
+    float NumberF=0;
    std::string Sequence;
     int Index;
     for (;;)

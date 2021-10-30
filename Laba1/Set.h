@@ -7,62 +7,45 @@ template <class T>
 class Set
 {
 private:
-	std::vector<T> data;
-	int size;
-	int Contain(T number)const
-	{
-		int index = 0;
-		while (data[index] != number)
-		{
-			index++;
-			if (index > size - 1)throw "Element does not exist!";
-		}
-		return index;
-	}
-	int GetSize()const
-	{
-		return size;
-	}
+	std::vector<T> v;
 public:
 	Set()
 	{
-		size = 0;
 	}
-	~Set()
+
+	auto Contain(T number)const
 	{
-		delete[] data;
-	}
-	Set<T>& operator=(const Set<T>& a)
-	{
-		size = a.size;
-		data = new T[size];
-		for (int i = 0; i < size; i++)
+		auto index = v.begin();
+		while (*index != number)
 		{
-			data[i] = a.data[i];
+			++index;
+			if (*index == number) return index;
 		}
-		return *this;
+		throw "Element does not exist!";
 	}
+
+	int GetSize()const
+	{
+		return v.size();
+	}
+
     void operator+(T number)
 	{
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < v.size(); i++)
 		{
-			if (data[i] == number) throw "Element already eixst!";
+			if (v[i] == number) throw "Element already eixst!";
 		}
-		T* tmp = new T[size + 1];
-		for (int i = 0; i < size; i++) { tmp[i] = data[i]; }
-		tmp[size] = number;
-		delete[] data;
-		data = tmp;
-		size++;
+		v.push_back(number);
 	}
+
 	Set<T> operator+(const Set<T>& a) const
 	{
 		Set<T> ResultSet = *this;
-		for (int i = 0; i < a.size; i++) {
+		for (int i = 0; i < a.GetSize(); i++) {
 			bool flag = true;
-			for (int j = 0; j < size; j++)
+			for (int j = 0; j < v.size(); j++)
 			{
-				if (a.data[i] == data[j])
+				if (a[i] == v[j])
 				{
 					flag = false;
 					break;
@@ -70,7 +53,7 @@ public:
 			}
 			if (flag == true)
 			{
-				ResultSet + a.data[i];
+				ResultSet + a[i];
 			}
 		}
 		return ResultSet;
@@ -79,42 +62,47 @@ public:
 	Set<T> Intersection(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < v.size(); i++)
 		{
-			for (int j = 0; j < set.size; j++)
+			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (data[i] == set.data[j]) ResultSet + data[i];
+				if (v[i] == set[j]) ResultSet + v[i];
 			}
 		}
 		return ResultSet;
 	}
+	
 	T operator[](int index) const
 	{
-		if ((index > size - 1) || (index < 0) || (size == 0))throw "Incorrect index!";
-		return data[index];
+		if ((index > v.size() - 1) || (index < 0) || (v.size() == 0))throw "Incorrect index!";
+		return v[index];
 	}
 	void operator-(T number)
 	{
-		if (size == 0) throw "No elements exist!";
-		T* tmp = new T[size - 1];
+		if (v.size() == 0) throw "No elements exist!";
+		auto index = Contain(number);
+		v.erase(index);
+		/*
+		T* tmp = new T[vsize - 1];
 		int index = Contain(number);
 		size--;
 		for (int i = 0; i < index; i++) { tmp[i] = data[i]; }
 		for (int i = index + 1; i < size + 1; i++) { tmp[i - 1] = data[i]; }
 		delete[] data;
 		data = tmp;
+		*/
 	}
 	Set<T> operator-(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
 		ResultSet = *this;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < v.size(); i++)
 		{
-			for (int j = 0; j < set.size; j++)
+			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (data[i] == set.data[j])
+				if (v[i] == set[j])
 				{
-					ResultSet - set.data[j];
+					ResultSet - set[j];
 					break;
 				}
 			}

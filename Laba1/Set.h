@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+
 template <class T>
 class Set
 {
 private:
-	T* data;
+	std::vector<T> data;
 	int size;
 	int Contain(T number)const
 	{
@@ -24,17 +26,7 @@ private:
 public:
 	Set()
 	{
-		data = NULL;
 		size = 0;
-	}
-	Set(const Set<T>& a)
-	{
-		size = a.size;
-		data = new T[size];
-		for (int i = 0; i < size; i++)
-		{
-			data[i] = a.data[i];
-		}
 	}
 	~Set()
 	{

@@ -9,17 +9,15 @@ class Set
 private:
 	std::vector<T> v;
 public:
-	Set()
-	{
-	}
 
-	auto Contain(T number)const
+	auto Contain(T element)const
 	{
 		auto index = v.begin();
-		while (*index != number)
+		if (*index == element) return index;
+		while (*index != element)
 		{
 			++index;
-			if (*index == number) return index;
+			if (*index == element) return index;
 		}
 		throw "Element does not exist!";
 	}
@@ -82,25 +80,16 @@ public:
 		if (v.size() == 0) throw "No elements exist!";
 		auto index = Contain(number);
 		v.erase(index);
-		/*
-		T* tmp = new T[vsize - 1];
-		int index = Contain(number);
-		size--;
-		for (int i = 0; i < index; i++) { tmp[i] = data[i]; }
-		for (int i = index + 1; i < size + 1; i++) { tmp[i - 1] = data[i]; }
-		delete[] data;
-		data = tmp;
-		*/
 	}
 	Set<T> operator-(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
 		ResultSet = *this;
-		for (int i = 0; i < v.size(); i++)
+		for (auto i: v)
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (v[i] == set[j])
+				if (i == set[j])
 				{
 					ResultSet - set[j];
 					break;

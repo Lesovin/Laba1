@@ -29,9 +29,9 @@ public:
 
     void operator+(T number)
 	{
-		for (int i = 0; i < v.size(); i++)
+		for (auto i: v)
 		{
-			if (v[i] == number) throw "Element already eixst!";
+			if (i* == number) throw "Element already eixst!";
 		}
 		v.push_back(number);
 	}
@@ -39,11 +39,12 @@ public:
 	Set<T> operator+(const Set<T>& a) const
 	{
 		Set<T> ResultSet = *this;
-		for (int i = 0; i < a.GetSize(); i++) {
+		for (int i = 0; i < a.GetSize(); i++) 
+		{
 			bool flag = true;
-			for (int j = 0; j < v.size(); j++)
+			for (auto j: v)
 			{
-				if (a[i] == v[j])
+				if (a[i] == j*)
 				{
 					flag = false;
 					break;
@@ -60,11 +61,11 @@ public:
 	Set<T> Intersection(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
-		for (int i = 0; i < v.size(); i++)
+		for (auto i: v)
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (v[i] == set[j]) ResultSet + v[i];
+				if (i* == set[j]) ResultSet + v[i];
 			}
 		}
 		return ResultSet;

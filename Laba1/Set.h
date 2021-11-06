@@ -27,11 +27,11 @@ public:
 		return v.size();
 	}
 
-    void operator+(T number)
+	void operator+(T number)
 	{
-		for (auto i: v)
+		for (int i = 0; i < v.size(); i++)
 		{
-			if (*i == number) throw "Element already eixst!";
+			if (v[i] == number) throw "Element already eixst!";
 		}
 		v.push_back(number);
 	}
@@ -39,12 +39,11 @@ public:
 	Set<T> operator+(const Set<T>& a) const
 	{
 		Set<T> ResultSet = *this;
-		for (int i = 0; i < a.GetSize(); i++) 
-		{
+		for (int i = 0; i < a.GetSize(); i++) {
 			bool flag = true;
-			for (auto j: v)
+			for (int j = 0; j < v.size(); j++)
 			{
-				if (a[i] == *j)
+				if (a[i] == v[j])
 				{
 					flag = false;
 					break;
@@ -61,16 +60,16 @@ public:
 	Set<T> Intersection(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
-		for (auto i: v)
+		for (int i = 0; i < v.size(); i++)
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (*i == set[j]) ResultSet + v[i];
+				if (v[i] == set[j]) ResultSet + v[i];
 			}
 		}
 		return ResultSet;
 	}
-	
+
 	T operator[](int index) const
 	{
 		if ((index > v.size() - 1) || (index < 0) || (v.size() == 0))throw "Incorrect index!";
@@ -86,7 +85,7 @@ public:
 	{
 		Set<T> ResultSet;
 		ResultSet = *this;
-		for (auto i: v)
+		for (auto i : v)
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{

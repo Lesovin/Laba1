@@ -39,7 +39,7 @@ int main()
         std::cout << "1. std::string" << "\n";
         std::cout << "2. Integer" << "\n";
         std::cout << "3. Float" << "\n";
-        std::cout << "Your choice:" << "\n";
+        std::cout << "Your choice:";
         std::cin >> Choice;
         if ((Choice == 1) || (Choice == 2) || (Choice == 3))break;
         system("cls");

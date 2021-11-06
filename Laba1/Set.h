@@ -31,7 +31,7 @@ public:
 	{
 		for (auto i: v)
 		{
-			if (i* == number) throw "Element already eixst!";
+			if (*i == number) throw "Element already eixst!";
 		}
 		v.push_back(number);
 	}
@@ -44,7 +44,7 @@ public:
 			bool flag = true;
 			for (auto j: v)
 			{
-				if (a[i] == j*)
+				if (a[i] == *j)
 				{
 					flag = false;
 					break;
@@ -65,7 +65,7 @@ public:
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (i* == set[j]) ResultSet + v[i];
+				if (*i == set[j]) ResultSet + v[i];
 			}
 		}
 		return ResultSet;

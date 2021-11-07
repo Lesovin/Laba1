@@ -12,12 +12,9 @@ public:
 
 	auto Contain(T element)const
 	{
-		auto index = v.begin();
-		if (*index == element) return index;
-		while (*index != element)
+		for (auto i = v.begin(); i != v.end(); i++)
 		{
-			++index;
-			if (*index == element) return index;
+			if (*i == element) return i;
 		}
 		throw "Element does not exist!";
 	}
@@ -29,9 +26,9 @@ public:
 
 	void operator+(T number)
 	{
-		for (int i = 0; i < v.size(); i++)
+		for (auto i = v.begin(); i != v.end(); i++)
 		{
-			if (v[i] == number) throw "Element already eixst!";
+			if (*i == number) throw "Element already eixst!";
 		}
 		v.push_back(number);
 	}
@@ -41,9 +38,9 @@ public:
 		Set<T> ResultSet = *this;
 		for (int i = 0; i < a.GetSize(); i++) {
 			bool flag = true;
-			for (int j = 0; j < v.size(); j++)
+			for (auto j = v.begin(); j != v.end(); j++)
 			{
-				if (a[i] == v[j])
+				if (a[i] == *j)
 				{
 					flag = false;
 					break;
@@ -60,11 +57,11 @@ public:
 	Set<T> Intersection(const Set<T>& set) const
 	{
 		Set<T> ResultSet;
-		for (int i = 0; i < v.size(); i++)
+		for (auto i = v.begin(); i != v.end(); i++)
 		{
 			for (int j = 0; j < set.GetSize(); j++)
 			{
-				if (v[i] == set[j]) ResultSet + v[i];
+				if (*i == set[j]) ResultSet + *i;
 			}
 		}
 		return ResultSet;
